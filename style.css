@@ -1,0 +1,58 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@500&family=Outfit:wght@300&display=swap');
+body{
+    background-color: rgb(22, 22, 22);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+header{
+    font-family: 'Outfit', sans-serif;
+    font-size: 35px;
+    text-align: center;
+}
+.h1-titulo{
+    padding: 5px;
+    margin: 5px;
+}
+
+section{
+    
+    font-family: 'Open Sans', sans-serif;
+    font-size:15px;
+    width: 450px;
+    margin: auto;
+    background-color: rgb(255, 252, 238);
+    border-radius: 20px;
+    border: 1px solid black;
+    text-align: center;
+}
+
+h3{
+    padding: 5px;
+    margin: 0px;
+}
+
+footer{
+    text-align: center;
+    padding: 0px;
+    margin: 0px;
+    font-family: 'Open Sans', sans-serif;
+    color: rgba(255, 86, 100, 0.842);
+}
+
+div{
+    text-align: center;
+}
+
+#stage{
+    padding-bottom: 20px;
+}
+
+#score{
+    margin: 0px;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+}
