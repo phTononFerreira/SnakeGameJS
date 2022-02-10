@@ -1,2 +1,2 @@
-# SnakeGameJS
-Famoso jogo da cobrinha
+# Snake Game 🐍 #
+
