@@ -3,7 +3,7 @@ onload = function(){
     var ctx = stage.getContext('2d')
     ctx.font = '30px Arial'
 
-    document.addEventListener("keydown",keyPush,20, true)
+    document.addEventListener("keydown", keyPush, true)
 
     setInterval(game, 80)
 
@@ -23,7 +23,6 @@ onload = function(){
     var trail = []
     var tail = 5
 
-
     function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
     }
@@ -31,14 +30,14 @@ onload = function(){
     function generateApple(){
         let placeable = true
         do{
-        placeable = true
-        ax = Math.floor(Math.random()*stgPieces)
-        ay = Math.floor(Math.random()*stgPieces)
-        for(let i=0;i<trail.length;i++){
-            if(trail[i].x == ax && trail[i].y == ay){
-                placeable = false
+            placeable = true
+            ax = Math.floor(Math.random()*stgPieces)
+            ay = Math.floor(Math.random()*stgPieces)
+            for(let i=0;i<trail.length;i++){
+                if(trail[i].x == ax && trail[i].y == ay){
+                    placeable = false
+                }
             }
-        }
         }while(!placeable)
     }
 
@@ -70,13 +69,17 @@ onload = function(){
         tail = 5
         px = py = 0
         StatGameover = false
+        generateApple()
     }
 
     function game(){
         if (StatGameover) return;
+
+        //Movement
         px += vx
         py += vy
 
+        //Infinite stage
         infiniteStage()
 
         //Render background
@@ -92,21 +95,26 @@ onload = function(){
             i%2==0 ? ctx.fillStyle = 'green' : ctx.fillStyle = 'yellowGreen'
             if(i == trail.length-1) ctx.fillStyle = 'DarkGreen';
             ctx.fillRect(trail[i].x*sl, trail[i].y*sl, sl, sl)
+            //Game over check
             if(trail[i].x == px && trail[i].y == py){
+                //window.alert(`[${i}]${trail[i].x},${trail[i].y} \n px:${px} py:${py}`)
                 gameover()
             }
         }
-
+        
+        //Tail renovation
         trail.push({ x:px, y:py }) 
-
         while(trail.length > tail){
             trail.shift()
         }
 
-        if(px == ax && py == ay){ //EAT APPLE
+        //Eat apple
+        if(px == ax && py == ay){ 
             tail++
             generateApple()
         }
+
+        //Score
         if(!StatGameover){
             document.getElementById('score').style.color = 'black'
             document.getElementById('score').innerHTML = `<strong>SCORE: ${tail-5}</strong>`
@@ -114,35 +122,40 @@ onload = function(){
             document.getElementById('score').style.color = 'red'
             document.getElementById('score').innerHTML = `<strong>SCORE: ${tail-5}</strong><strong>GAME OVER</strong>`
         }
+
+        //DEBUG
+        //console.clear()
+        //console.log(`X:${px} Y:${py}`)
+        //console.log("GAMEOVER:"+StatGameover)
+        //console.log(trail[trail.length-2].x,trail[trail.length-2].y)
     }
 
     //Event listener
     function keyPush(event){
-        console.log('entrou')
         switch(event.keyCode){
             case 37: //LEFT
-                if(dir != 'right'){
-                    dir = 'left'
+                if(dir != 'right' && !(trail[trail.length-2].x-1 == px && trail[trail.length-2].y == py)){
+                    dir = 'left'  
                     vx = -vel
-                    vy = 0
+                    vy = 0                
                 }
                 break
             case 38: //UP
-                if(dir != 'down'){
+                if(dir != 'down' && !(trail[trail.length-2].x == px && trail[trail.length-2].y == py-1)){
                     dir = 'up'
                     vx = 0
                     vy = -vel
                 }
                 break  
             case 39: //RIGHT
-                if(dir != 'left'){
+                if(dir != 'left' && !(trail[trail.length-2].x == px+1 && trail[trail.length-2].y == py)){
                     dir = 'right'
                     vx = vel
                     vy = 0
                 }
                 break
             case 40: //DOWN
-                if(dir != 'up'){
+                if(dir != 'up' && !(trail[trail.length-2].x == px && trail[trail.length-2].y == py+1)){
                     dir = 'down'
                     vx = 0
                     vy = vel
