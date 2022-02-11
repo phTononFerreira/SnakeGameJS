@@ -5,7 +5,11 @@ onload = function(){
 
     document.addEventListener("keydown", keyPush, true)
 
-    setInterval(game, 80)
+    /////////////////////////
+    var initialTail = 3
+    var timeTick = 80 //ms
+    /////////////////////////
+    setInterval(game, timeTick)
 
     const canvasSize = { x:stage.width, y:stage.height }
 
@@ -19,9 +23,10 @@ onload = function(){
     var ax = Math.floor(Math.random()*stgPieces)
     var ay = Math.floor(Math.random()*stgPieces)
     var StatGameover = false
+    var score = 0
 
     var trail = []
-    var tail = 5
+    var tail = initialTail
 
     function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
@@ -66,9 +71,11 @@ onload = function(){
         dir = 'right'
         vx = vel
         vy = 0
-        tail = 5
+        tail = initialTail
         px = py = 0
+        score = 0
         StatGameover = false
+        trail = []
         generateApple()
     }
 
@@ -91,9 +98,11 @@ onload = function(){
         ctx.fillRect(ax*sl, ay*sl, sl, sl)
         
         //Render snake
+        let maincolor = {r:25, g:102, b:0}
         for(let i=0;i<trail.length;i++){
-            i%2==0 ? ctx.fillStyle = 'green' : ctx.fillStyle = 'yellowGreen'
-            if(i == trail.length-1) ctx.fillStyle = 'DarkGreen';
+            //i%2==0 ? ctx.fillStyle = 'green' : ctx.fillStyle = 'yellowGreen'
+            //if(i == trail.length-1) ctx.fillStyle = 'rgb(15, 60, 0)';
+            ctx.fillStyle = `rgb(${maincolor.r+i*3},${maincolor.g+i*3},${maincolor.b})`
             ctx.fillRect(trail[i].x*sl, trail[i].y*sl, sl, sl)
             //Game over check
             if(trail[i].x == px && trail[i].y == py){
@@ -111,16 +120,20 @@ onload = function(){
         //Eat apple
         if(px == ax && py == ay){ 
             tail++
+            score++
             generateApple()
         }
 
         //Score
         if(!StatGameover){
-            document.getElementById('score').style.color = 'black'
-            document.getElementById('score').innerHTML = `<strong>SCORE: ${tail-5}</strong>`
+            document.getElementById('scoreNumber').style.color = 'black'
+            document.getElementById('a-gameover').style.visibility = "hidden"
+            document.getElementById('scoreNumber').innerHTML = `<strong>SCORE: ${score}</strong>`
         }else{
-            document.getElementById('score').style.color = 'red'
-            document.getElementById('score').innerHTML = `<strong>SCORE: ${tail-5}</strong><strong>GAME OVER</strong>`
+            document.getElementById('scoreNumber').style.color = 'red'
+            document.getElementById('a-gameover').style.color = 'red'
+            document.getElementById('a-gameover').style.visibility = "visible"
+            document.getElementById('scoreNumber').innerHTML = `<strong>SCORE: ${score}</strong>`
         }
 
         //DEBUG

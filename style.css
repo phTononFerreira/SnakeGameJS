@@ -15,16 +15,26 @@ header{
     margin: 5px;
 }
 
-section{
-    
+#div-main{
     font-family: 'Open Sans', sans-serif;
     font-size:15px;
-    width: 450px;
+
+    display: flex;
+    
+    width: fit-content;
+    
     margin: auto;
+
     background-color: rgb(255, 252, 238);
+    
     border-radius: 20px;
-    border: 1px solid black;
+    flex-direction: column;
+
     text-align: center;
+    align-items: center;
+    justify-content: center;
+
+    padding: 10px 20px;
 }
 
 h3{
@@ -40,19 +50,22 @@ footer{
     color: rgba(255, 86, 100, 0.842);
 }
 
-div{
-    text-align: center;
-}
-
 #stage{
-    padding-bottom: 20px;
+    padding-bottom: 10px;
 }
 
-#score{
-    margin: 0px;
-    padding: 10px;
+#div-score{
+    margin: 8px;
+    padding: 0;
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    text-align: center;
+    justify-content: flex-start;
+}
+
+#scoreNumber{
+    margin-right: 240px;
+}
+
+p{
+    padding: 0;
+    margin: 0;
 }
