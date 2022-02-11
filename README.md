@@ -1,1 +1,1 @@
-<h1 aling="center" class="h1-titulo"><span style="color: green">Snake</span> <span style="color: yellowGreen">Game</span></h1>
+<h1 align="center">Snake Game 🐍</h1>
