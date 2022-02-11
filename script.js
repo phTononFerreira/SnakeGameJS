@@ -151,7 +151,7 @@ onload = function(){
     function keyPush(event){
         switch(event.keyCode){
             case 37: //LEFT
-                if(dir != 'right' && !(trail[trail.length-2].x-1 == px && trail[trail.length-2].y == py)){
+                if(dir != 'right' && !(trail[trail.length-2].x == px-1 && trail[trail.length-2].y == py)){
                     dir = 'left'  
                     vx = -vel
                     vy = 0                

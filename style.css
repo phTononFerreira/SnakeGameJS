@@ -17,9 +17,6 @@ header{
 
 section{
     display: flex;
-    text-align: center;
-    align-items: center;
-    justify-content: center;
 }
 
 .main{
@@ -41,7 +38,7 @@ section{
     align-items: center;
     justify-content: center;
 
-    padding: 10px 20px;
+    padding: 5px 10px;
 }
 
 .info{
@@ -50,6 +47,10 @@ section{
 
 #div-apples{
     background-color: rgb(255, 212, 212);
+}
+
+#div-records{
+    background-color: rgb(255, 254, 238);
 }
 
 h3{
@@ -67,21 +68,22 @@ footer{
 
 
 #stage{
-    padding-bottom: 10px;
+    padding: 0px 15px;
+    padding-bottom: 15px;
 }
 
 #div-score{
-    margin: 8px 0px;
+    margin: 5px 10px;
     padding: 0;
     display: flex;
     justify-content: flex-start;
 }
 
 #scoreNumber{
-    margin-right: 240px;
+    margin-right: 220px;
 }
 
-p{
+span{
     padding: 0;
     margin: 0;
 }
