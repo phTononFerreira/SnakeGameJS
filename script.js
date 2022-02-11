@@ -9,7 +9,7 @@ onload = function(){
     var initialTail = 3
     var timeTick = 80 //ms
     /////////////////////////
-    
+
     setInterval(game, timeTick)
 
     const canvasSize = { x:stage.width, y:stage.height }
@@ -128,13 +128,16 @@ onload = function(){
         //Score
         if(!StatGameover){
             document.getElementById('scoreNumber').style.color = 'black'
+            document.getElementById('div-main').style.backgroundColor = 'rgb(229, 255, 212)' 
             document.getElementById('a-gameover').style.visibility = "hidden"
             document.getElementById('scoreNumber').innerHTML = `<strong>SCORE: ${score}</strong>`
         }else{
-            document.getElementById('scoreNumber').style.color = 'red'
-            document.getElementById('a-gameover').style.color = 'red'
+            document.getElementById('scoreNumber').style.color = 'rgb(90, 20, 20)'
+            document.getElementById('a-gameover').style.color = 'rgb(90, 20, 20)' 
+            document.getElementById('div-main').style.backgroundColor = 'rgb(255, 134, 134)' 
             document.getElementById('a-gameover').style.visibility = "visible"
             document.getElementById('scoreNumber').innerHTML = `<strong>SCORE: ${score}</strong>`
+
         }
 
         //DEBUG
