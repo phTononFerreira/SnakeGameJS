@@ -9,6 +9,7 @@ onload = function(){
     var initialTail = 3
     var timeTick = 80 //ms
     /////////////////////////
+    
     setInterval(game, timeTick)
 
     const canvasSize = { x:stage.width, y:stage.height }
