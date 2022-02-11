@@ -15,7 +15,14 @@ header{
     margin: 5px;
 }
 
-#div-main{
+section{
+    display: flex;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+}
+
+.main{
     font-family: 'Open Sans', sans-serif;
     font-size:15px;
 
@@ -37,6 +44,10 @@ header{
     padding: 10px 20px;
 }
 
+.info{
+    width: 10vw;
+}
+
 h3{
     padding: 5px;
     margin: 0px;
@@ -49,6 +60,7 @@ footer{
     font-family: 'Open Sans', sans-serif;
     color: rgba(255, 86, 100, 0.842);
 }
+
 
 #stage{
     padding-bottom: 10px;

@@ -13,14 +13,20 @@
         <h1 class="h1-titulo"><span style="color: green">Snake</span> <span style="color: yellowGreen">Game</span></h1>
     </header>
     <section>
-        <div id="div-main">
+        <div class="main info" id="records">
+            High Score: 0
+        </div>
+        <div class="main" id="div-main">
             <div id="div-score">
-                <a class="score" id="scoreNumber"><strong>SCORE: 0</strong></a>
-                <a class="score" id="a-gameover"><strong>GAME OVER</strong></a>
+                <span class="score" id="scoreNumber"><strong>SCORE: 0</strong></span>
+                <span class="score" id="a-gameover"><strong>GAME OVER</strong></span>
             </div>
             <div>
                 <canvas id="stage" width="400" height="400"></canvas>
             </div>
+        </div>
+        <div  class="main info" id="apples">
+            Apples: 0
         </div>
     </section>
     <footer>
