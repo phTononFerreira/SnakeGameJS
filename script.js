@@ -5,7 +5,7 @@ onload = function(){
 
     document.addEventListener("keydown", keyPush, true)
 
-    /////////////////////////
+    //////////////////////////
     var initialTail = 3
     var timeTick = 80 //ms
     /////////////////////////
@@ -14,17 +14,20 @@ onload = function(){
 
     const canvasSize = { x:stage.width, y:stage.height }
 
-    const vel = 1      //default vel
-    var dir = 'right'
-    var vx = vel        //x vel
-    var vy = 0          //y vel
-    var px = py = 0     //snake head position
-    var sl = 20         //piece size (px)
+    const vel = 1                    //default vel
+    var dir = 'right'                //direction of snake
+    var vx = vel                     //x vel
+    var vy = 0                       //y vel
+    var px = py = 0                  //snake head position
+    var sl = 20                      //piece size (px)
     var stgPieces = canvasSize.x/20  //stage size
     var ax = Math.floor(Math.random()*stgPieces)
     var ay = Math.floor(Math.random()*stgPieces)
     var StatGameover = false
+    
+    infoUpdate()
     var score = 0
+    localStorage.setItem('HighScore', 0)
 
     var trail = []
     var tail = initialTail
@@ -67,6 +70,12 @@ onload = function(){
 
         vx = vy = 0
 
+        if (score > getLocalStorage('HighScore')) {
+            console.log("New High Score!")
+            setLocalStorage('HighScore',score);
+            infoUpdate()
+        }
+
         await sleep(5000)
 
         dir = 'right'
@@ -99,12 +108,24 @@ onload = function(){
         ctx.fillRect(ax*sl, ay*sl, sl, sl)
         
         //Render snake
-        let maincolor = {r:25, g:102, b:0}
+        let maincolor = [28, 77, 0] //RGB
+        let actualcolor = {r:maincolor[0], g:maincolor[1],  b:maincolor[2]}
+        let orderInv = false
         for(let i=0;i<trail.length;i++){
-            //i%2==0 ? ctx.fillStyle = 'green' : ctx.fillStyle = 'yellowGreen'
-            //if(i == trail.length-1) ctx.fillStyle = 'rgb(15, 60, 0)';
-            ctx.fillStyle = `rgb(${maincolor.r+i*3},${maincolor.g+i*3},${maincolor.b})`
+            if(actualcolor.r >= 93 || actualcolor.g>=255) orderInv = true;
+            if (actualcolor.r == maincolor[0] || actualcolor.g == maincolor[1])  orderInv = false;
+
+            if (orderInv){
+                actualcolor.r -= 3
+                actualcolor.g -= 5
+            }else{
+                actualcolor.r += 3
+                actualcolor.g += 5
+            }
+
+            ctx.fillStyle = `rgb(${actualcolor.r},${actualcolor.g},${actualcolor.b})`
             ctx.fillRect(trail[i].x*sl, trail[i].y*sl, sl, sl)
+
             //Game over check
             if(trail[i].x == px && trail[i].y == py){
                 //window.alert(`[${i}]${trail[i].x},${trail[i].y} \n px:${px} py:${py}`)
@@ -137,7 +158,6 @@ onload = function(){
             document.getElementById('div-main').style.backgroundColor = 'rgb(255, 134, 134)' 
             document.getElementById('a-gameover').style.visibility = "visible"
             document.getElementById('scoreNumber').innerHTML = `<strong>SCORE: ${score}</strong>`
-
         }
 
         //DEBUG
@@ -182,4 +202,16 @@ onload = function(){
                 break
         }
     }
+}
+
+function infoUpdate(){
+    document.getElementById('div-records').innerHTML = `<strong id="highscore">⭐Your High Score: ${getLocalStorage('HighScore')}</strong>`
+}
+
+function setLocalStorage(key,value){
+    localStorage.setItem(key, JSON.stringify(value))
+}
+
+function getLocalStorage(key){
+    return Number(localStorage.getItem(key))
 }
